@@ -3,7 +3,6 @@ Below is the **README.md** file in its entirety. You can **copy & paste** the co
 <details>
 <summary>Click to expand README.md content</summary>
 
-```markdown
 # **Multiquery** &nbsp;![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Status](https://img.shields.io/badge/Status-POC-orange)
 
 Multiquery is a **command-line application** written in Python designed to query multiple Large Language Models (LLMs) simultaneously from a single prompt.  
