@@ -1,0 +1,9 @@
+# File: multiquery/config/config.yaml
+
+llm_providers:
+  - name: chatgpt
+    class_path: multiquery.llm_providers.chatgpt.ChatGPTProvider
+    api_key: "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"
+  - name: grok
+    class_path: multiquery.llm_providers.grok.GrokProvider
+    api_key: "YOUR_GROK_API_KEY"
