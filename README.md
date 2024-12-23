@@ -217,6 +217,3 @@ This makes it easy to review, share, or archive your results.
 ---
 
 **Enjoy using Multiquery!** If you have any questions, suggestions, or run into issues, please open an [Issue](https://github.com/your-username/multiquery/issues) or submit a Pull Request. Together, we can make multi-LLM querying simpler and more powerful.
-```
-
-Now you’ll have a properly formatted `README.md` with all the features, usage instructions, and future roadmap.
