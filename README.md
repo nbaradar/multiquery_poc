@@ -1,8 +1,5 @@
 Below is the **README.md** file in its entirety. You can **copy & paste** the content into a local file named `README.md` to preserve proper formatting. 
 
-<details>
-<summary>Click to expand README.md content</summary>
-
 # **Multiquery** &nbsp;![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Status](https://img.shields.io/badge/Status-POC-orange)
 
 Multiquery is a **command-line application** written in Python designed to query multiple Large Language Models (LLMs) simultaneously from a single prompt.  
@@ -221,13 +218,5 @@ This makes it easy to review, share, or archive your results.
 
 **Enjoy using Multiquery!** If you have any questions, suggestions, or run into issues, please open an [Issue](https://github.com/your-username/multiquery/issues) or submit a Pull Request. Together, we can make multi-LLM querying simpler and more powerful.
 ```
-</details>
-
----
-
-**Instructions:**  
-1. Click "**Copy**" on the code block above.  
-2. Create a file named `README.md` in your local repository.  
-3. Paste the content into that file and save.  
 
 Now you’ll have a properly formatted `README.md` with all the features, usage instructions, and future roadmap.
