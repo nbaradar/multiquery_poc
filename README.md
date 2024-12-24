@@ -1,6 +1,9 @@
 # **Multiquery** &nbsp;![Python](https://img.shields.io/badge/Python-3.8%2B-blue) ![Status](https://img.shields.io/badge/Status-POC-orange)
 
-Multiquery is a **command-line application** written in Python designed to query multiple Large Language Models (LLMs) simultaneously from a single prompt.  
+> **Note**  
+> This is an early proof of concept (POC). Use it as a reference implementation or scaffold for your own multi-LLM projects.
+
+Multiquery is a **command-line Proof of Concept application** written in Python designed to query multiple Large Language Models (LLMs) simultaneously from a single prompt.  
 It currently supports **ChatGPT** and **Grok**, with the flexibility to add more LLM providers in the future.
 
 ---
@@ -24,9 +27,6 @@ It currently supports **ChatGPT** and **Grok**, with the flexibility to add more
 - **Config-Driven**: Set up your LLM providers in a YAML config file—no need to modify core code.
 - **(Coming Soon)**: Progress bar for real-time status of query retrieval from each LLM.
 - **(Coming Soon)**: Export queries and responses to **Markdown** in timestamped folders.
-
-> **Note**  
-> This is an early proof of concept (POC). Use it as a reference implementation or scaffold for your own multi-LLM projects.
 
 ---
 
@@ -148,5 +148,3 @@ This makes it easy to review, share, or archive your results.
 </details>
 
 ---
-
-**Enjoy using Multiquery!** If you have any questions, suggestions, or run into issues, please open an [Issue](https://github.com/your-username/multiquery/issues) or submit a Pull Request. Together, we can make multi-LLM querying simpler and more powerful.
