@@ -21,7 +21,8 @@ def instantiate_providers(config: dict):
         module = importlib.import_module(module_name)
         provider_class = getattr(module, class_name)
 
-        # Instantiate the provider
-        provider_instance = provider_class()  # Pass API key if required
+        # Instantiate the provider with API keys if available
+        api_key = provider_config.get("api_key")
+        provider_instance = provider_class(api_key) if api_key else provider_class  # Pass API key if required
         providers.append(provider_instance)
     return providers

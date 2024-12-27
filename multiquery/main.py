@@ -2,6 +2,10 @@
 import sys
 import os
 import argparse
+
+# DEBUG: Print the Python path for debugging
+print("Python path:", sys.path)
+
 # I don't know why this is needed, but it is. It allows the import of the providers from the parent directory when running from VSCode "Play" button
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Don't know why this is needed either, but allows you to run from CLI
