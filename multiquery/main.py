@@ -3,7 +3,7 @@ import sys
 import os
 import argparse
 
-# DEBUG: Print the Python path for debugging
+# DEBUG:Print the Python path for debugging
 print("Python path:", sys.path)
 
 # I don't know why this is needed, but it is. It allows the import of the providers from the parent directory when running from VSCode "Play" button
@@ -26,7 +26,9 @@ def main():
         args.query = input("")
 
     # Load configuration
-    config = load_config("multiquery/config/config.yaml")
+    #config = load_config("multiquery/config/config.yaml")
+    config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config', 'config.yaml')
+    config = load_config(config_path)
 
     # Instantiate providers
     providers = instantiate_providers(config)

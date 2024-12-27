@@ -3,8 +3,8 @@
 from .base import LLMProvider
 
 class GrokProvider(LLMProvider):
-    """
-    Mock implementation for the Grok LLM provider.
-    """
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+ 
     def send_query(self, query: str) -> str:
         return f"Mock response from Grok for query: '{query}'"

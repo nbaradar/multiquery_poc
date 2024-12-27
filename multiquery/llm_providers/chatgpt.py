@@ -1,22 +1,24 @@
 from .base import LLMProvider
-import openai
+from openai import OpenAI
 class ChatGPTProvider(LLMProvider):
 
     def __init__(self, api_key: str):
         self.api_key = api_key
 
+    """
+    Sends a query to ChatGPT and returns the response.
+    """
     def send_query(self, query: str) -> str:
-        """
-        Sends a query to ChatGPT and returns the response.
-        """
 
-        #First set the API key (retrieved from config file)
-        openai.api_key = self.api_key
+        #First create a client and set the API key (retrieved from config file)
+        client = OpenAI(
+            api_key=self.api_key
+        )
 
         #Now attempt to make a call to REST API
         try:
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+            chat_completion = client.chat.completions.create(
+                model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": query},
