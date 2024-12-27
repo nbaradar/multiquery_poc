@@ -7,3 +7,6 @@ llm_providers:
   - name: grok
     class_path: multiquery.llm_providers.grok.GrokProvider
     api_key: "YOUR_GROK_API_KEY"
+  - name: gemini
+    class_path: multiquery.llm_providers.gemini.GeminiProvider
+    api_key: "YOUR_GEMINI_API_KEY"
