@@ -15,17 +15,19 @@ class ChatGPTProvider(LLMProvider):
             api_key=self.api_key
         )
 
-        #Now attempt to make a call to REST API
         try:
+            #Now attempt to make a call to REST API
             chat_completion = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
-                    {"role": "user", "content": query},
+                    {
+                    "role": "user",
+                    "content": query,
+                    },
                 ],
                 temperature=0.7,  # Adjust for creativity
                 max_tokens=150,   # Limit response length
             )
-            return response.choices[0].message["content"].strip()
-        except openai.error.OpenAIError as e:
-            return f"An error occurred while querying ChatGPT: {str(e)}"
+            return chat_completion.choices[0].messages.content
+        except Exception as e: 
+            return f"Error: {e}"

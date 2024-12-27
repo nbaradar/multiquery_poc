@@ -3,7 +3,7 @@
 llm_providers:
   - name: chatgpt
     class_path: multiquery.llm_providers.chatgpt.ChatGPTProvider
-    api_key: ""
+    api_key: "YOUR_CHATGPT_API_KEY"
   - name: grok
     class_path: multiquery.llm_providers.grok.GrokProvider
     api_key: "YOUR_GROK_API_KEY"
