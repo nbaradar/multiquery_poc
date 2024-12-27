@@ -1,8 +1,15 @@
 # File: multiquery/main.py
+import sys
+import os
 import argparse
+# I don't know why this is needed, but it is. It allows the import of the providers from the parent directory when running from VSCode "Play" button
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Don't know why this is needed either, but allows you to run from CLI
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from llm_providers.chatgpt import ChatGPTProvider
 from llm_providers.grok import GrokProvider
-from multiquery.utils.config_loader import load_config, instantiate_providers
+from utils.config_loader import load_config, instantiate_providers
+
 def main():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Query multiple LLM providers and display their responses.")
