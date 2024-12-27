@@ -13,8 +13,13 @@ from utils.config_loader import load_config, instantiate_providers
 def main():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Query multiple LLM providers and display their responses.")
-    parser.add_argument("query", type=str, help="The query to send to all LLM providers.")
+    parser.add_argument("query", type=str, nargs="?", help="The query to send to all LLM providers.")
     args = parser.parse_args()
+
+    # If no prompt is provided, ask the user interactively
+    if not args.query:
+        print("No prompt arg provided. Please enter your query below:")
+        args.query = input("")
 
     # Load configuration
     config = load_config("multiquery/config/config.yaml")
