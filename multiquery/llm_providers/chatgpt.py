@@ -28,6 +28,6 @@ class ChatGPTProvider(LLMProvider):
                 temperature=0.7,  # Adjust for creativity
                 max_tokens=150,   # Limit response length
             )
-            return chat_completion.choices[0].messages.content
+            return chat_completion.choices[0].message.content
         except Exception as e: 
             return f"Error: {e}"
