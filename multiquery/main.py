@@ -9,6 +9,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from llm_providers.chatgpt import ChatGPTProvider
 from llm_providers.grok import GrokProvider
 from utils.config_loader import load_config, instantiate_providers
+from utils.json_exporter import export_to_json
 
 async def display_responses(providers, query):
     """
@@ -21,6 +22,14 @@ async def display_responses(providers, query):
     # asyncio.gather takes the list of tasks and executes them concurrently.
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
+    responses = {}
+    for provider, result in zip(providers, results):
+        provider_name = provider.__class__.__name__
+        if isinstance(result, Exception):
+            responses[provider_name] = f"Error: {result}"
+        else:
+            responses[provider_name] = result
+
     # Collect and display responses
     print("===== Multiquery Results =====\n")
     for provider, result in zip(providers, results):
@@ -30,17 +39,27 @@ async def display_responses(providers, query):
         else:
             print(result)
         print("\n==============================\n")
+
+    return responses
     
 async def main_async():
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Query multiple LLM providers and display their responses.")
     parser.add_argument("query", type=str, nargs="?", help="The query to send to all LLM providers.")
+    parser.add_argument("--export-json", type=str, help="File path to save the query and responses in JSON format. If file already exists, it will append")
     args = parser.parse_args()
 
     # If no prompt is provided, ask the user interactively
     if not args.query:
         print("No prompt arg provided. Please enter your query below:")
         args.query = input("")
+
+        print("Do you want to export the results?: (y/n): ", end="")
+        export_choice = input("").strip().lower()
+        if export_choice == 'y':
+            args.export_json = input("Please enter the file path to save the results. Leave blank for default: ").strip()
+        if args.export_json == "":
+            args.export_json = "output/results.json"
 
     # Load configuration
     config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config', 'config.yaml')
@@ -51,7 +70,12 @@ async def main_async():
     providers = instantiate_providers(config)
 
     # Instantiate providers
-    await display_responses(providers, args.query)
+    responses = await display_responses(providers, args.query)
+    
+    # Export results to JSON if requested
+    if args.export_json:
+        export_to_json(args.export_json, args.query, responses)
+        print(f"\nResults exported to {args.export_json}")
 
 if __name__ == "__main__":
     try:
