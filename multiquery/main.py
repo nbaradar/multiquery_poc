@@ -10,6 +10,7 @@ from llm_providers.chatgpt import ChatGPTProvider
 from llm_providers.grok import GrokProvider
 from utils.config_loader import load_config, instantiate_providers
 from utils.json_exporter import export_to_json
+from utils.mongodb_client import store_result_in_mongodb
 
 async def display_responses(providers, query):
     """
@@ -76,6 +77,18 @@ async def main_async():
     if args.export_json:
         export_to_json(args.export_json, args.query, responses)
         print(f"\nResults exported to {args.export_json}")
+
+    # Load MongoDB Config
+    db_config = config.get("database", {})
+    store_result_in_mongodb(
+        uri=db_config.get("uri", "mongodb://localhost:27017"),
+        db_name=db_config.get("name", "test"),
+        collection_name=db_config.get("collection", "result"),
+        data={
+            "query": args.query,
+            "responses": responses
+        }
+    )
 
 if __name__ == "__main__":
     try:
