@@ -25,8 +25,7 @@ It currently supports **ChatGPT** and **Grok**, with the flexibility to add more
 - **Clear Output**: Displays neatly formatted responses for each LLM side-by-side in the terminal.
 - **Extensible Design**: Quickly add additional LLM providers by implementing a simple interface.
 - **Config-Driven**: Set up your LLM providers in a YAML config file—no need to modify core code.
-- **(Coming Soon)**: Progress bar for real-time status of query retrieval from each LLM.
-- **(Coming Soon)**: Export queries and responses to **Markdown** in timestamped folders.
+- **Export to JSON + DB**: Export queries and responses to timestamped **JSON** in output folder (configurable path).
 
 ---
 
