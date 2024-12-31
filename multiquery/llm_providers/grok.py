@@ -25,7 +25,7 @@ class GrokProvider(LLMProvider):
             chat_completion = await client.chat.completions.create(
                 model="grok-2-1212",
                 messages=[
-                    {"role": "system", "content": "You are Grok, a chatbot inspired by the Hitchhikers Guide to the Galaxy."},
+                    {"role": "system", "content": "You are Grok, a chatbot designed by xAI"},
                     {"role": "user", "content": query},
                 ],
             )
