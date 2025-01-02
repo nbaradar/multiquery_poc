@@ -6,6 +6,7 @@ class ChatGPTProvider(LLMProvider):
 
     def __init__(self, api_key: str):
         self.api_key = api_key
+        self.provider_name = "ChatGPT"
 
     async def send_query(self, query: str) -> str:
         """

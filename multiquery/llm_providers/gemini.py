@@ -5,6 +5,7 @@ import google.generativeai as genai
 class GeminiProvider(LLMProvider):
     def __init__(self, api_key: str):
         self.api_key = api_key
+        self.provider_name = "Gemini"
  
     async def send_query(self, query: str) -> str:
         """

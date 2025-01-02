@@ -12,9 +12,36 @@ from utils.config_loader import load_config, instantiate_providers
 from utils.json_exporter import export_to_json
 from utils.mongodb_client import store_result_in_mongodb
 
-async def display_responses(providers, query):
+async def display_responses(results):
     """
-    Display responses from all providers.
+    Displays the responses from the response.
+    """
+    # Collect and display responses
+    # print("===== Multiquery Results =====\n")
+    # for result in results:
+    #     print(result.provider_name)
+    #     if isinstance(result, Exception):
+    #         print(f"Error: {result}")
+    #     else:
+    #         print(result)
+    #     print("\n==============================\n")
+    # Collect and display responses
+    print("===== Multiquery Results =====\n")
+    for provider, response in results.items():
+        print(f"[{provider}]")
+        if isinstance(response, Exception):
+            print(f"Error: {response}")
+        else:
+            print(response)
+        print("\n==============================\n")
+
+
+async def run_providers_asynchronously(providers, query):
+    """
+    Runs the given providers using the provided query by the user. This is done asynchronously.
+
+    :param providers: A list of provider instances. 
+    :param query: The user query.
     """
     #Creates a list of tasks to be executed. In this case, each provider(task w/ async method) sends a query
     #.send_query does not get exected, but is turned into a coroutine object
@@ -23,23 +50,14 @@ async def display_responses(providers, query):
     # asyncio.gather takes the list of tasks and executes them concurrently.
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
+    # Loops through providers and results, zipping them together to create a dictionary of responses
     responses = {}
     for provider, result in zip(providers, results):
-        provider_name = provider.__class__.__name__
+        provider_name = provider.provider_name
         if isinstance(result, Exception):
             responses[provider_name] = f"Error: {result}"
         else:
             responses[provider_name] = result
-
-    # Collect and display responses
-    print("===== Multiquery Results =====\n")
-    for provider, result in zip(providers, results):
-        print(f"[{provider.__class__.__name__}]")
-        if isinstance(result, Exception):
-            print(f"Error: {result}")
-        else:
-            print(result)
-        print("\n==============================\n")
 
     return responses
     
@@ -70,9 +88,12 @@ async def main_async():
     # TL;DR Looking through the config file then dynamically creating provider instances based on the config
     providers = instantiate_providers(config)
 
-    # Instantiate providers
-    responses = await display_responses(providers, args.query)
-    
+    # Send query to all providers and return responses
+    responses = await run_providers_asynchronously(providers, args.query)
+
+    #Display responses
+    await display_responses(responses)
+
     # Export results to JSON if requested
     if args.export_json:
         export_to_json(args.export_json, args.query, responses)
